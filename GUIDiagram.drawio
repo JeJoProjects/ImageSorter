@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.6">
+  <diagram name="Page-1" id="qWu-3lHmJC7vcXPc1XOE">
+    <mxGraphModel dx="1182" dy="442" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="120" width="630" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-2" value="Browse Folder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="140" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-3" value="(Progress bar)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="220" width="610" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-4" value="Save Current Config" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-5" value="Sort Images" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="140" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-6" value="Select images format which you verified: &amp;lt;--- images format ---&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="180" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-7" value="(Console out)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="250" width="610" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="OOOSwgxTlASCrFuzPOcQ-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="140" width="350" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

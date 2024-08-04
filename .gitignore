@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+
+Build/
+build/
+Builds/
+builds/
+build/
+Build/
+Test/
+ThirdParty/googletest
