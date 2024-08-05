@@ -3,6 +3,9 @@
 #include <ranges>
 #include <vector>
 #include <cctype>
+#include <thread>
+#include <mutex>
+#include <atomic>
 
 std::string ImageSorterOperations::normalizeExtension(const std::string_view ext)
 {
@@ -55,22 +58,51 @@ void ImageSorterOperations::sortImagesWithoutMatchingExtensions(
         logCallback("Created destination directory: " + destDir.string());
     }
 
-    int movedCount = 0;
+    std::atomic<int> movedCount = 0;
     int totalFiles = filesToMove.size();
-    for (const auto& file : filesToMove)
+    std::mutex logMutex;
+
+    auto moveFiles = [&](const std::vector<std::filesystem::directory_entry>& files) {
+        for (const auto& file : files)
+        {
+            const std::filesystem::path destFile = destDir / file.path().filename();
+            try
+            {
+                std::filesystem::rename(file, destFile);
+                {
+                    std::lock_guard<std::mutex> lock(logMutex);
+                    logCallback("Moved: " + file.path().filename().string());
+                }
+                ++movedCount;
+                progressCallback(movedCount, totalFiles);
+            }
+            catch (const std::filesystem::filesystem_error& e)
+            {
+                std::lock_guard<std::mutex> lock(logMutex);
+                logCallback("Error moving file " + file.path().filename().string() + ": " + e.what());
+            }
+        }
+    };
+
+    unsigned int numThreads = std::thread::hardware_concurrency();
+    std::vector<std::thread> threads;
+    size_t filesPerThread = filesToMove.size() / numThreads;
+    size_t remainingFiles = filesToMove.size() % numThreads;
+
+    for (unsigned int i = 0; i < numThreads; ++i)
     {
-        const std::filesystem::path destFile = destDir / file.path().filename();
-        try
+        size_t start = i * filesPerThread;
+        size_t end = (i + 1) * filesPerThread;
+        if (i == numThreads - 1)
         {
-            std::filesystem::rename(file, destFile);
-            logCallback("Moved: " + file.path().filename().string());
-            ++movedCount;
-            progressCallback(movedCount, totalFiles);
+            end += remainingFiles;
         }
-        catch (const std::filesystem::filesystem_error& e)
-        {
-            logCallback("Error moving file " + file.path().filename().string() + ": " + e.what());
-        }
+        threads.emplace_back(moveFiles, std::vector<std::filesystem::directory_entry>(filesToMove.begin() + start, filesToMove.begin() + end));
+    }
+
+    for (auto& thread : threads)
+    {
+        thread.join();
     }
 
     std::string message = "Sorted " + std::to_string(movedCount) + " images to " + destDir.string();
